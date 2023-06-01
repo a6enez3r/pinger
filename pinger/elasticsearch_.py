@@ -4,7 +4,10 @@ elasticsearch_.py: module to ping Elasticsearch
 import requests
 from clize import run
 
+from pinger.log import logfunc
 
+
+@logfunc
 def elasticsearch_running(
     host: str = "localhost", port: str = "9200", timeout: int = 5
 ) -> bool:

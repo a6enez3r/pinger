@@ -5,7 +5,10 @@ from clize import run
 from pymysql import connect
 from pymysql.cursors import DictCursor
 
+from pinger.log import logfunc
 
+
+@logfunc
 def mysql_running(
     host: str = "localhost",
     port: int = 3306,

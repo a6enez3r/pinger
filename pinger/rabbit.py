@@ -4,7 +4,10 @@ rabbit.py: module to ping RabbitMQ
 import pika
 from clize import run
 
+from pinger.log import logfunc
 
+
+@logfunc
 def rabbit_running(host: str = "localhost") -> bool:
     """
     Check if Rabbit MQ is running

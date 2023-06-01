@@ -5,7 +5,10 @@ redis_.py: module to ping Redis
 from clize import run
 from redis import Redis, exceptions
 
+from pinger.log import logfunc
 
+
+@logfunc
 def redis_running(host: str = "localhost", port: int = 6379) -> bool:
     """
     Check if Redis is running
