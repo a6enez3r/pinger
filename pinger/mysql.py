@@ -1,3 +1,6 @@
+"""
+mysql.py: module to ping MySQL
+"""
 from clize import run
 from pymysql import connect
 from pymysql.cursors import DictCursor
@@ -8,7 +11,7 @@ def mysql_running(
     port: int = 3306,
     user: str = "www",
     password: str = "j8Kuc00n",
-    db: str = "licensedb",
+    database: str = "licensedb",
 ) -> bool:
     """
     Check if MySQL is running
@@ -19,7 +22,7 @@ def mysql_running(
         port : str, optional, default '9200'
         user : str, optional, default 'www'
         password : str, optional, default 'j8Kuc00n'
-        db : str, optional, default 'licensedb'
+        database : str, optional, default 'licensedb'
     """
     # create the connection
     connection = connect(
@@ -27,12 +30,12 @@ def mysql_running(
         port=port,
         user=user,
         password=password,
-        db=db,
+        db=database,
         cursorclass=DictCursor,
     )
 
     # get the cursor
-    cursor = connection.cursor()
+    connection.cursor()
 
     # if the connection was lost, then it reconnects
     connection.ping(reconnect=True)

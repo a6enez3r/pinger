@@ -1,3 +1,6 @@
+"""
+__main__.py: CLI interface to pinger
+"""
 from clize import run
 
 from pinger.elasticsearch_ import elasticsearch_running

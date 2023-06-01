@@ -1,5 +1,9 @@
+"""
+redis_.py: module to ping Redis
+"""
+
 from clize import run
-from redis import Redis
+from redis import Redis, exceptions
 
 
 def redis_running(host: str = "localhost", port: int = 6379) -> bool:
@@ -14,8 +18,8 @@ def redis_running(host: str = "localhost", port: int = 6379) -> bool:
     try:
         client = Redis(host=host, port=port)
         return client.ping()
-    except Exception as e:
-        print(e)
+    except exceptions.ConnectionError as redis_error:
+        print(redis_error)
         return False
 
 

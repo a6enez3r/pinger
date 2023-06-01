@@ -1,8 +1,13 @@
+"""
+elasticsearch_.py: module to ping Elasticsearch
+"""
 import requests
 from clize import run
 
 
-def elasticsearch_running(host: str = "localhost", port: str = "9200") -> bool:
+def elasticsearch_running(
+    host: str = "localhost", port: str = "9200", timeout: int = 5
+) -> bool:
     """
     Check if Elasticsearch is running
 
@@ -12,13 +17,13 @@ def elasticsearch_running(host: str = "localhost", port: str = "9200") -> bool:
         port : str, optional, default '9200'
     """
     try:
-        res = requests.get("http://{}:{}/_cluster/health".format(host, port))
+        res = requests.get(f"http://{host}:{port}/_cluster/health", timeout=timeout)
         if res.status_code == 200:
             if res.json()["number_of_nodes"] > 0:
                 return True
         return False
-    except Exception as e:
-        print(e)
+    except Exception as elasticsearch_error:  # pylint: disable=W0718
+        print(elasticsearch_error)
         return False
 
 
