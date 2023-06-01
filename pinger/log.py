@@ -7,9 +7,9 @@ from typing import Any, Dict
 from loguru import logger as custom_logger
 
 
-def formatter(
+def formatter(  # pylint: disable=too-many-return-statements
     record: Dict[str, Any]
-) -> str:  # pylint: disable=too-many-return-statements
+) -> str:
     """
     custom log formatter (for loguru)
 
