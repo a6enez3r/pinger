@@ -1,6 +1,6 @@
 # `pinger` [![pipeline](https://github.com/a6enez3r-sidefx/pinger/actions/workflows/pipeline.yml/badge.svg)](https://github.com/a6enez3r-sidefx/pinger/actions/workflows/pipeline.yml)
 
-package to generate mock random & domain specific data. currently supports generating `json`, `csv`, `parquet`, and `xlsx` and requires python 3.7+
+package to ping the status of various services 
 
 
 ## `install`
