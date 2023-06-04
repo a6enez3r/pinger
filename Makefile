@@ -194,12 +194,48 @@ docs-serve:
 
 ## -- docker --
 
-## build image [docker]
+## build docker env [docker_env = development | production]
 build-env:
-	@echo "building image..."
-	docker build -t ${pn}:${container_tag} - < dockerfiles/Dockerfile.${docker_env}
+	@docker build -f ./dockerfiles/Dockerfile.${docker_env} . -t ${pn}:${container_tag}
 
-## build & push image [docker]
-push-env:
-	@make build-env
-	@docker push ${pn}:${container_tag}
+## build & push image
+push-env: build-env 
+	@docker push ${registry}${pn}:${container_tag}
+
+## start docker env [docker_env = development | production]
+up-env: build-env
+	$(eval cid = $(shell (docker ps -aqf "name=${pn}")))
+	$(if $(strip $(cid)), \
+		@echo "existing container found. please run make purge-env",\
+		@docker run -p ${port}:5000 -v $(PWD):/root/${pn} --name ${pn} ${pn}:${container_tag})
+	$(endif)
+
+## exec. into docker env
+exec-env:
+	$(eval cid = $(shell (docker ps -aqf "name=${pn}")))
+	$(if $(strip $(cid)), \
+		@echo "exec into env container..." && docker exec -it ${cid} bash,\
+		@echo "env container not running.")
+	$(endif)
+
+## remove docker env
+purge-env:
+	$(eval cid = $(shell (docker ps -aqf "name=${pn}")))
+	$(if $(strip $(cid)), \
+		@echo "purging container..." && docker stop ${cid} && docker rm ${cid},\
+		@echo "env container not running.")
+	$(endif)
+
+## get status of docker env
+status-env:
+	$(eval cid = $(shell (docker ps -aqf "name=${pn}")))
+	$(if $(strip $(cid)), \
+		@echo "${pn} dev container running",\
+		@echo "${pn} dev container not running.")
+	$(endif)
+
+## init Linux env / install common tools
+init-env:
+	@apt-get update && apt-get -y upgrade
+	@apt-get install curl sudo bash vim ncurses-bin -y
+	@apt-get install build-essential python3-pip -y --no-install-recommends

@@ -1,0 +1,12 @@
+FROM python:latest
+
+ADD pinger /root/pinger/pinger
+ADD requirements /root/pinger/requirements
+ADD README.md /root/pinger/README.md
+ADD setup.py /root/pinger/setup.py
+ADD setup.cfg /root/pinger/setup.cfg
+ADD versioneer.py /root/pinger/versioneer.py
+
+RUN pip install /root/pinger
+
+ENTRYPOINT ["tail", "-f", "/dev/null"]

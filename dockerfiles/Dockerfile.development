@@ -1,0 +1,10 @@
+FROM python:latest
+
+COPY . /root/pinger
+RUN cd /root/pinger && make deps
+WORKDIR /root/pinger
+
+RUN pip install /root/pinger
+
+ENTRYPOINT ["tail", "-f", "/dev/null"]
+
