@@ -9,4 +9,4 @@ ADD versioneer.py /root/pinger/versioneer.py
 
 RUN pip install /root/pinger
 
-ENTRYPOINT ["tail", "-f", "/dev/null"]
+ENTRYPOINT ["pinger"]
