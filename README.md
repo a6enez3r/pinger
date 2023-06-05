@@ -1,4 +1,4 @@
-# `pinger` [![pipeline](https://github.com/a6enez3r-sidefx/pinger/actions/workflows/pipeline.yml/badge.svg)](https://github.com/a6enez3r-sidefx/pinger/actions/workflows/pipeline.yml)
+# `pinger` [![pipeline](https://github.com/a6enez3r/pinger/actions/workflows/pipeline.yml/badge.svg)](https://github.com/a6enez3r/pinger/actions/workflows/pipeline.yml)
 
 package to ping the status of various services 
 
